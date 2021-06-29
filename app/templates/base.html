@@ -1,0 +1,52 @@
+<html lang="ru">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-with-Button.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <title>
+            {% block title %}SIDR{% endblock %}
+        </title>
+        {% endblock %}
+    </head>
+    <body style="box-shadow: 0px 0px;">
+        {% block navbar %}
+        <nav class="navbar navbar-light navbar-expand-md bg-dark navigation-clean-button">
+            <div class="container">
+                <a class="navbar-brand text-warning" href="#" style="font-size: 36px;padding: 0px 0px;">SIDR</a>
+                <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <span class="navbar-text actions">
+                        <a class="text-light login" href="#">Log In</a>
+                        <a class="btn btn-outline-info active action-button" role="button">Sign Up</a>
+                    </span>
+                </div>
+            </div>
+        </nav>
+        {% endblock %}
+        {% block content %}
+        <div class="container">
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endfor %}
+            <div class="page-header">
+                {% block page_content %}{% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+</html>

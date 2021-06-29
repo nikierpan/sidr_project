@@ -1,6 +1,11 @@
 from os import environ
 from pathlib import Path
+from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
+
+dotenv_path = BASE_DIR.joinpath('.env')
+if Path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
 
 
 class Config:
