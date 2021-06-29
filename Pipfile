@@ -10,6 +10,8 @@ flask-mail = "*"
 flask-moment = "*"
 flask-sqlalchemy = "*"
 bootstrap-flask = "*"
+flask-migrate = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
