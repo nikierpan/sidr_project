@@ -7,6 +7,24 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-with-Button.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/util.css') }}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
         <title>
             {% block title %}SIDR{% endblock %}
         </title>
@@ -16,32 +34,52 @@
         {% block navbar %}
         <nav class="navbar navbar-light navbar-expand-md bg-dark navigation-clean-button">
             <div class="container">
-                <a class="navbar-brand text-warning" href="#" style="font-size: 36px;padding: 0px 0px;">SIDR</a>
+                <a class="navbar-brand text-warning" href="{{ url_for('main.index') }}" style="font-size: 36px;padding:
+                0px 0px;">
+                    SIDR
+                </a>
                 <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav mr-auto"></ul>
+                    {% if current_user.is_authenticated %}
+                    <div class="dropdown ml-auto menu_links">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 20px;
+                        color: white">
+                            {{ current_user.username }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" style="margin-top: 26px">
+                            <a class="dropdown-item" href="">Change password</a>
+                            <a class="dropdown-item" href="">Change email</a>
+                            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Log Out</a>
+                        </div>
+                    </div>
+                    {% else %}
                     <span class="navbar-text actions">
-                        <a class="text-light login" href="#">Log In</a>
-                        <a class="btn btn-outline-info active action-button" role="button">Sign Up</a>
+                        <a class="text-light login" href="{{ url_for('auth.login') }}">Log In</a>
+                        <a class="btn btn-outline-info active action-button" role="button"
+                           href="{{ url_for('auth.register') }}">
+                        Sign Up
+                        </a>
                     </span>
+                    {% endif %}
                 </div>
             </div>
         </nav>
         {% endblock %}
         {% block content %}
-        <div class="container">
+        <div class="body-background">
+            <div style="height: 38px">
             {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-            </div>
+                <div class="alert alert-warning">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
             {% endfor %}
-            <div class="page-header">
-                {% block page_content %}{% endblock %}
             </div>
+            {% block page_content %}{% endblock %}
         </div>
         {% endblock %}
         {% block scripts %}

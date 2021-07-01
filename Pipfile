@@ -12,6 +12,8 @@ flask-sqlalchemy = "*"
 bootstrap-flask = "*"
 flask-migrate = "*"
 psycopg2-binary = "*"
+flask-wtf = "*"
+email-validator = "*"
 
 [dev-packages]
 

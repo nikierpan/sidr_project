@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <p>Dear {{ user.username }}</p>
+
+    <p>Welcome to SIDR!</p>
+
+    <p>To confirm your account please click on the following link:</p>
+
+    <p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+
+    <p>Sincerely,</p>
+
+    <p>The SIDR Team</p>
+
+    <p>Note: replies to this email address are not monitored</p>
+</body>
+</html>
